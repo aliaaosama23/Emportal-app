@@ -1,0 +1,35 @@
+$font-path: "../assets/fonts";
+//$app-direction: rtl;
+@import "ionic.globals";
+$colors: (
+  primary:    #488aff,
+  secondary:  #32db64,
+  danger:     #f53d3d,
+  light:      #f4f4f4,
+  dark:       #222,
+  mycolor:   #FBC421,
+  anothercolor:#3465D9,
+  anothercolor1:#727A8D,
+  anothercolor2:#90939B
+);
+
+//$toolbar-background:   #eec013;
+
+// @font-face {
+//   font-family: 'DinNext';
+//   src:url('../assets/fonts/regular/DinNextRegular.ttf') format('truetype');
+//   font-weight: normal;
+//   font-style: normal;
+//  }
+//  $font-family-base: "DinNext";
+//  $font-family-ios-base: $font-family-base;
+//  $font-family-md-base: $font-family-base;
+//  $font-family-wp-base: $font-family-base;
+ $colors-ios:	copy-colors($colors);
+ $fab-md-background-color:color($colors-ios, light);
+ $fab-ios-background-color:color($colors-ios, light);
+ @import "ionic.ionicons";
+// #dbdee6
+//#a7a7a7
+// @import "roboto";
+// @import "noto-sans";

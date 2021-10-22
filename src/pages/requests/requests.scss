@@ -1,0 +1,116 @@
+page-requests {
+    #segment_item{
+      font-size: 15px;
+      font-weight: bold;
+    }
+
+    .segment-md .segment-button{
+      color:  #12679a;
+    }
+    .segment-ios .segment-button{
+      color:  #12679a;
+    }
+    .segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {
+      border-color: unset;
+      opacity: 1;
+    }
+    .segment-ios .segment-button.activated, .segment-ios .segment-button.segment-activated {
+      border-color: unset;
+      opacity: 1;
+    }
+
+    .card-md {
+      margin: 10px;
+      border-radius: 1em;
+      width: calc(100% - 20px);
+      font-size: 1.4rem;
+      background: #fff;
+      -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.4), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  }
+  .card-ios {
+    margin: 10px;
+    border-radius: 1em;
+    width: calc(100% - 20px);
+    font-size: 1.4rem;
+    background: #fff;
+    -webkit-box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.4), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+}
+
+
+  html[dir="rtl"]{
+    input#alert-input-0-0{
+    direction: rtl  !important;
+  }
+  .alert-md .alert-input {
+    margin: 5px 0;
+    border-bottom: 1px solid #dedede;
+    color: #000;
+    text-align: right !important;
+}
+}
+
+  html[dir="ltr"]{
+    input#alert-input-0-0{
+    direction: ltr !important;
+  }
+  .alert-md .alert-input {
+    margin: 5px 0;
+    border-bottom: 1px solid #dedede;
+    color: #000;
+    text-align: left !important;
+}
+  }
+  ion-icon.icon.icon-md.ion-md-add {
+    color: #3465D9;
+    font-size: 3rem;
+    font-weight: bolder;
+}
+ion-icon.icon.icon-ios.ion-md-add {
+  color: #3465D9;
+  font-size: 3rem;
+  font-weight: bolder;
+}
+ .segment-md .segment-button.segment-activated {
+   border-color: unset;
+  opacity: 1;
+}
+.segment-ios .segment-button.segment-activated {
+  border-color: unset;
+ opacity: 1;
+}
+h1, h2, h3, h4, h5, h6 {
+  margin-top: 1.6rem;
+  margin-bottom: 0px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.select-md .select-icon {
+  position: absolute !important;
+  width: 12px;
+  height: 30px;
+  left: 0px !important;
+}
+.select-ios .select-icon {
+  position: absolute !important;
+  width: 12px;
+  height: 30px;
+  left: 0px !important;
+}
+ion-card-content.card-content.card-content-md {
+  padding-top: 0px !important;
+}
+ion-card-content.card-content.card-content-ios {
+  padding-top: 0px !important;
+}
+.card-header {
+  text-align: center;
+  font-size: 1.6rem;
+  color: white;
+  padding: 9px !important;
+  background: #a7a7a7;
+  padding-top: 13px;
+}
+}

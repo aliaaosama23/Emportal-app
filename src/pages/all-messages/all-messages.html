@@ -1,0 +1,43 @@
+
+
+<ion-content padding>
+  <ion-row>
+    <ion-col col-3 style="font-size: 20px;white-space: nowrap;">
+         {{"inbox_messages"|translate}}
+    </ion-col>
+    <ion-col col-8></ion-col>
+    <ion-col col-1 (click)="back()">
+      <ion-icon name="ios-arrow-round-back-outline" style="font-size: 33px;"></ion-icon>
+    </ion-col>
+  </ion-row>
+
+
+  <div *ngIf="all_messages.length==0" style="text-align: center;font-size: 18px;margin-top: 10%;">
+      صندوق الرسائل فارغ
+  </div>
+  <div *ngIf="all_messages.length!=0">
+    <div *ngFor="let message of all_messages" style="border-radius: 5px; background-color: #c9c8d0;margin-top: 4px;margin-bottom: 5px;">
+      <ion-row>
+        <ion-col col-5 *ngIf="message.Msg_Subject!=''" >
+           {{message.Msg_Subject}}
+        </ion-col>
+        <ion-col col-5 *ngIf="message.Msg_Subject==''">
+            {{ "no_Subject"|translate}}
+          </ion-col>
+        <ion-col col-6></ion-col>
+        <ion-col col-1>
+          <img src="assets/imgs/31.png" (click)="remove_message(message.Msg_ID)">
+        </ion-col>
+      </ion-row>
+      <ion-row (click)="message_details(message.Msg_Subject,message.Msg_Date,message.Msg_Body,message.Msg_ID)">
+        <ion-col col-9  style="white-space: nowrap;width: 11px;text-overflow: ellipsis;overflow: hidden;">
+            <span>  {{message.Msg_Body}}</span> 
+        </ion-col>
+        <ion-col col-3 style="white-space: nowrap">
+            <span> {{message.Msg_Date}}</span>  
+        </ion-col>
+      </ion-row>
+    </div>
+  </div>
+ 
+</ion-content>

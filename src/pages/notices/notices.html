@@ -1,0 +1,142 @@
+<ion-header>
+    <ion-navbar>
+      <ion-row>
+          <ion-col col-2>
+            <ion-icon style="font-size: 23px" name="md-menu" (click)="toggle()"></ion-icon>
+          </ion-col>
+
+        <ion-col col-6>
+            <ion-title *ngIf="language=='ar'" style=" margin-top: -9px;  text-align: right;">  {{"notices"|translate}} </ion-title>
+          <ion-title *ngIf="language=='en'" style="  margin-top: -9px;   text-align: left;">  {{"notices"|translate}} </ion-title>
+        </ion-col>
+        <ion-col col-4>
+          <img src="assets/imgs/app_logo.png">
+        </ion-col>
+      </ion-row>
+    </ion-navbar>
+</ion-header>
+
+<ion-content >
+
+
+<ion-content >
+
+  <ion-row>
+    <ion-col col-6>
+      <ion-card (tap)="tapEvent(0)" *ngIf="!l1" style="background-color: white">
+        <ion-card-header  style="text-align: center" >
+            {{"Passport_Expiration_Date"|translate}}
+        </ion-card-header>
+        <ion-card-content>
+          {{Passport}}
+        </ion-card-content>
+      </ion-card>
+      <ion-card (tap)="tapEvent(1)"  *ngIf="l1" style="background-color: #3465D9">
+        <ion-card-header  style="text-align: center;color:white" >
+            {{"Passport_Expiration_Date"|translate}}
+        </ion-card-header>
+        <ion-card-content style="color: white">
+          {{Passport}}
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+    <ion-col col-6>
+        <ion-card (tap)="tapEvent1(0)" *ngIf="!l2" style="background-color: white">
+            <ion-card-header  style="text-align:center">
+                {{ "Driving_License_Expiration_Date"|translate}}
+            </ion-card-header>
+            <ion-card-content >
+              {{Driving}}
+            </ion-card-content>
+        </ion-card>
+      <ion-card (tap)="tapEvent1(1)"  *ngIf="l2" style="background-color: #3465D9">
+        <ion-card-header  style="text-align:center;color:white">
+            {{ "Driving_License_Expiration_Date"|translate}}
+        </ion-card-header>
+        <ion-card-content style="color:white">
+          {{Driving}}
+        </ion-card-content>
+    </ion-card>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+      <ion-col col-6>
+        <ion-card (tap)="tapEvent2(0)" *ngIf="!l3" style="background-color: white">
+          <ion-card-header  style="text-align: center" >
+              {{ "Iqama_Expiration_Date"|translate}}
+          </ion-card-header>
+          <ion-card-content>
+              {{Iqama}}
+          </ion-card-content>
+        </ion-card>
+        <ion-card (tap)="tapEvent2(1)"  *ngIf="l3" style="background-color: #3465D9">
+          <ion-card-header  style="text-align: center;color:white" >
+              {{ "Iqama_Expiration_Date"|translate}}
+          </ion-card-header>
+          <ion-card-content style="color: white">
+              {{Iqama}}
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+          <ion-card (tap)="tapEvent3(0)" *ngIf="!l4" style="background-color: white">
+              <ion-card-header  style="text-align:center">
+                  {{  "Visa_Expiration_Date"|translate}}
+              </ion-card-header>
+              <ion-card-content >
+                  {{Visa}}
+              </ion-card-content>
+          </ion-card>
+        <ion-card (tap)="tapEvent3(1)"  *ngIf="l4" style="background-color: #3465D9">
+          <ion-card-header  style="text-align:center;color:white">
+              {{  "Visa_Expiration_Date"|translate}}
+          </ion-card-header>
+          <ion-card-content style="color:white">
+              {{Visa}}
+          </ion-card-content>
+      </ion-card>
+      </ion-col>
+    </ion-row>
+
+
+
+    <ion-row>
+        <ion-col col-6>
+            <ion-card (tap)="tapEvent4(0)" *ngIf="!l5" style="background-color: white">
+              <ion-card-header  style="text-align: center" >
+                  {{  "DoctorLicExpireDate"|translate}}
+              </ion-card-header>
+              <ion-card-content>
+                  {{Doctor_License}}
+              </ion-card-content>
+            </ion-card>
+            <ion-card (tap)="tapEvent4(1)"  *ngIf="l5" style="background-color: #3465D9">
+              <ion-card-header  style="text-align: center;color:white" >
+                  {{  "DoctorLicExpireDate"|translate}}
+              </ion-card-header>
+              <ion-card-content style="color: white">
+                  {{Doctor_License}}
+              </ion-card-content>
+            </ion-card>
+        </ion-col>
+        <ion-col col-6>
+            <ion-card (tap)="tapEvent5(0)" *ngIf="!l6" style="background-color: white">
+                <ion-card-header  style="text-align:center">
+                    {{ "IsUnderTrainin"|translate}}
+                </ion-card-header>
+                <ion-card-content >
+                    {{Test}}
+                </ion-card-content>
+            </ion-card>
+            <ion-card (tap)="tapEvent5(1)"  *ngIf="l6" style="background-color: #3465D9">
+              <ion-card-header  style="text-align:center;color:white">
+                  {{ "IsUnderTrainin"|translate}}
+              </ion-card-header>
+              <ion-card-content style="color:white">
+                  {{Test}}
+              </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+</ion-content>

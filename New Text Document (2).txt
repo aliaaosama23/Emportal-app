@@ -1,0 +1,6 @@
+nitco.mobile@gmail.com
+Mobile2015P@$$
+
+
+Your app currently targets API level 26 and must target at least API level 28 to ensure it is built on the latest APIs optimized for security and performance.
+ Change your app's target API level to at least 28.

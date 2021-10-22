@@ -1,0 +1,54 @@
+page-salary {
+  ion-col.col {
+    text-align: center;
+}
+ion-select {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  max-width: 100%;
+}
+.item-md.item-block .item-inner{
+  border-bottom: unset !important
+}
+.item-ios.item-block .item-inner{
+  border-bottom: unset !important
+}
+.select-md {
+  padding: 0px !important
+}
+.select-ios {
+  padding: 0px !important
+}
+.select-md .select-icon .select-icon-inner {
+  left: 5px;
+  top: 50%;
+  margin-top: 5px;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 5px solid;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  color: #999;
+  pointer-events: none;
+}
+.select-ios .select-icon .select-icon-inner {
+  left: 5px;
+  top: 50%;
+  margin-top: 5px;
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-top: 5px solid;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+  color: #999;
+  pointer-events: none;
+}
+.select-text {
+  padding: 8px !important ;
+}
+}

@@ -1,0 +1,151 @@
+page-messages {
+  .select-text {
+    color: white !important;
+  }
+  ion-icon.icon.icon-ios.ion-ios-add {
+    color: white;
+}
+  .fab {
+    color: #fff;
+    background-color: #eec013 !important;
+}
+ion-icon.icon.icon-md.ion-md-add {
+  color: #f4f4f4 !important;
+}
+
+  #segment_item{
+    font-size: 15px;
+    font-weight: bold;
+  }
+  .segment-md .segment-button{
+    color:  #12679a;
+  }
+  .segment-ios .segment-button{
+    color:  #12679a;
+  }
+  .segment-md .segment-button.activated, .segment-md .segment-button.segment-activated {
+    border-color:  #12679a;
+    opacity: 1;
+  }
+  .segment-ios .segment-button.activated, .segment-ios .segment-button.segment-activated {
+    border-color:  #12679a;
+    opacity: 1;
+  }
+  .select-md {
+     padding: 0px;
+}
+.select-ios {
+  padding: 0px;
+}
+ion-select {
+
+  max-width: 100% !important;
+  width: 100%;
+}
+.select-md .select-icon .select-icon-inner {
+  right: 0px;
+
+}
+.select-ios .select-icon .select-icon-inner {
+  right: 0px;
+
+}
+.item-md.item-block .item-inner {
+  padding-left: 0px;
+  border-bottom: 1px solid #dedede;
+}
+.item-ios.item-block .item-inner {
+  padding-left: 0px;
+  border-bottom: 1px solid #dedede;
+}
+.isread{
+  background: white
+}
+.notread{
+
+  background: #cacace
+}
+ .item-md.item-block .item-inner {
+  padding-left: 0px;
+   border-bottom: none !important
+}
+.item-md.item-block .item-inner {
+  padding-right: 8px;
+   border-bottom: none !important
+}
+.item-ios.item-block .item-inner {
+  padding-left: 0px;
+   border-bottom: none !important
+}
+.item-ios.item-block .item-inner {
+  padding-right: 8px;
+   border-bottom: none !important
+}
+
+.select-text {
+  overflow: visible !important;
+}
+// .select-md .select-icon {
+//   position: relative;
+//   width: 8px;
+//   height: 19px;
+// }
+// .select-ios .select-icon {
+//   position: relative;
+//   width: 8px;
+//   height: 19px;
+// }
+.checkbox-md .checkbox-checked {
+  border-color: black;
+  background-color: black;
+}
+.checkbox-ios .checkbox-checked {
+  border-color: black;
+  background-color: black;
+}
+
+html[dir="ltr"]{
+  input.text-input.text-input-md{
+    direction: ltr;
+  }
+  .select-icon {
+    left: 64% !important;
+  }
+  input#alert-input-2-0 {
+    direction: ltr;
+    border: 1px solid #a7abbb;
+  }
+
+}
+.item.item-md .checkbox-md {
+  position: static;
+  display: block;
+  margin: 7px 6px 9px 4px;
+}
+.item.item-ios .checkbox-ios {
+  position: static;
+  display: block;
+  margin: 7px 6px 9px 4px;
+}
+h3 {
+  font-size: 16px;
+}
+h3#alert-subhdr-3 {
+  margin-top: 17px;
+}
+
+.checkbox-ios .checkbox-checked {
+  border-color: white;
+  background-color: #3465D9;
+}
+.checkbox-md .checkbox-checked {
+  border-color: white;
+  background-color: #3465D9;
+}
+.opened{
+  height: 79%;
+}
+.closed{
+  height: 66%;
+}
+}

@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-navbar>
+      <ion-row>
+          <ion-col col-2>
+            <ion-icon style="font-size: 23px" name="md-menu" (click)="toggle()"></ion-icon>
+          </ion-col>
+        <ion-col col-6>
+            <ion-title *ngIf="language=='ar'" style=" margin-top: -9px;  text-align: right;">  {{"Langauge"|translate}} </ion-title>
+          <ion-title *ngIf="language=='en'" style="  margin-top: -9px;   text-align: left;">  {{"Langauge"|translate}} </ion-title>
+        </ion-col>
+        <ion-col col-4>
+          <img src="assets/imgs/app_logo.png">
+        </ion-col>
+      </ion-row>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list radio-group [(ngModel)]="language" (ionChange)="changeLanguage($event)">
+    
+      <ion-item>
+        <ion-label>اللغة العربية</ion-label>
+        <ion-radio value="ar"></ion-radio>
+      </ion-item>
+    
+      <ion-item>
+          <ion-label>English</ion-label>
+          <ion-radio value="en"></ion-radio>
+      </ion-item>
+      
+    </ion-list>
+</ion-content>

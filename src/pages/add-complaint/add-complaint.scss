@@ -1,0 +1,27 @@
+page-add-complaint {
+
+span.button-inner{
+  font-size: 20px;
+
+}h4 {
+  text-align: center;
+  font-weight: 100;
+  color: black;
+}
+
+ .item-inner {
+ 
+  border-radius: 4px;
+  background-color: #dbdee6;
+}
+.item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+   border-bottom-color: unset !important;
+   -webkit-box-shadow: unset !important;
+   box-shadow: unset !important;
+}
+.item-ios.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-ios.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+  border-bottom-color: unset !important;
+  -webkit-box-shadow: unset !important;
+  box-shadow: unset !important;
+}
+}

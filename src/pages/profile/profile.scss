@@ -1,0 +1,20 @@
+page-profile {
+  .card-content {
+    padding: 0px 0px;
+    font-size: 1.4rem;
+    line-height: 1.5;
+  }
+  .card{
+    margin: 0px
+  }
+
+
+  input#fileInput{
+    position: absolute;
+    opacity: 0;
+  }
+  .toolbar-title{
+    text-align:right;
+  }
+
+}

@@ -1,0 +1,64 @@
+<ion-content padding >
+
+
+  <div style="padding: 10px;border-radius: 10px;">
+      <div style="text-align: center; margin: 10% 0px;">
+        <ion-row>
+          <ion-col col-3></ion-col>
+          <ion-col col-6>
+            <img  style="text-align: center; "  src="assets/imgs/app_logo.png">
+          </ion-col>
+          <ion-col col-3></ion-col>
+        </ion-row>
+      </div>
+
+      <div style="border-radius: 6px;">
+
+          <form  [formGroup]="myform">
+              <ion-item>
+                <ion-input placeholder='{{"user_name"|translate}}' formControlName="Username" type="text"></ion-input>
+              </ion-item>
+              <div style="color:red;    text-align:center;    margin: 9px;" *ngIf="!myform.get('Username').valid && myform.get('Username').touched">
+                  {{ "enter your user_name"|translate}}
+              </div>
+
+              <ion-item>
+                <ion-input  placeholder='{{"password"|translate}}'  formControlName="Password" type="password"></ion-input>
+              </ion-item>
+              <div style="color:red;    text-align: center;    margin: 9px;" *ngIf="!myform.get('Password').valid && myform.get('Password').touched">
+                  {{"enter your password"|translate}}
+              </div>
+
+              <ion-item>
+                  <ion-select  formControlName="language"  style="max-width: 100%;    width: 100%;  padding: 9px !important;" okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="language"  (ionChange)="set_language()">
+                      <ion-option value="ar">عربي</ion-option>
+                      <ion-option value="en">English</ion-option>
+                  </ion-select>
+              </ion-item>
+               
+              <div>
+                <ion-row>
+                  <ion-col col-6 (click)="reset_password()">
+                    {{"forget_password"|translate}}
+                  </ion-col>
+                  <ion-col col-6></ion-col>
+                </ion-row>
+              </div>
+
+              <div *ngIf="language=='ar'" style="text-align: center" (click)="logForm()">
+                <img  style="text-align: center" src="assets/imgs/22.png">
+              </div>
+              
+              <div *ngIf="language=='en'" style="text-align: center" (click)="logForm()">
+                  <img  style="text-align: center;transform: rotate(180deg)" src="assets/imgs/22.png">
+              </div>
+          </form>
+
+          <div style="text-align: center">
+            <img  src="assets/imgs/23.png">
+          </div>
+
+    </div>
+
+</div>
+</ion-content>

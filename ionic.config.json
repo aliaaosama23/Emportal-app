@@ -1,0 +1,14 @@
+{
+  "name": "Emportal",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "proxies": [
+    {
+      "path": "/api",
+      "proxyUrl": "http://192.168.1.160:1010/api"
+    }
+  ],
+  "app_id": ""
+}

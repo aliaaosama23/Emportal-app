@@ -1,0 +1,70 @@
+  <ion-menu id="mysidemenu" [side]="dir ? 'right' : 'left'" [content]="content" type="overlay">
+    <!-- side={{mySide}} -->
+      <ion-header >
+ 
+        <div *ngIf="language=='ar'">
+          <img style="height: 190px;width: 100%"  onerror="this.onerror=null;this.src='assets/imgs/images.jpg';" [src]= 'Emp_PhotoPath'>
+           <div style="     font-size: 20px;     margin-right: 10px;  margin-top: -58px;color: white"> 
+            {{' ' +emp_frist_name + '      ' +emp_second_name}}
+           </div> 
+           <div style="    font-size: 17px;color: white;     margin-right: 35px; ">
+            {{' ' +emp_code}}
+           </div>
+        </div>
+
+        <div *ngIf="language=='en'">
+            <img style="height: 200px;width: 100%"  onerror="this.onerror=null;this.src='assets/imgs/images.jpg';" [src]= 'Emp_PhotoPath'>
+             <div style="     font-size: 20px;     margin-left: 10px;  margin-top: -58px;color: white"> 
+              {{' ' +emp_frist_name + '      ' +emp_second_name}}
+             </div> 
+             <div style="    font-size: 17px;color: white;     margin-left: 35px; ">
+              {{' ' +emp_code}}
+             </div>
+          </div>
+      </ion-header>
+      <ion-content class="mymenu">
+            <ion-list style="overflow-y: hidden;">
+                <button style="margin-top: 2px;" menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+                 <ion-row>
+                   <ion-col col-6 style="    line-height: 29px;">
+                      <span style= " margin: 12px; color:white;    font-size: 1.5rem;font-weight: bold">
+                        {{p.title |translate}}
+                      </span>
+                   </ion-col>
+                   <ion-col col-3></ion-col>
+                   <ion-col col-3 *ngIf="p.title=='complaints' || p.title=='warnings'" >
+                      <span *ngIf="p.title=='complaints'">
+                        <ion-badge  style="background-color: red;color:white;border-radius: 50%;    ">
+                          {{No_Of_EmpComplaints}}
+                        </ion-badge>
+                      </span>
+                      <span *ngIf="p.title=='warnings'">
+                          <ion-badge  style="background-color: red;color:white;border-radius: 50%;  ">
+                            {{No_Of_Warning}}
+                          </ion-badge>
+                        </span>
+                   </ion-col>
+                 </ion-row>
+                </button>
+              </ion-list>
+<!-- 
+              <ion-row *ngIf="language=='ar'">
+                  <ion-col col-10></ion-col>
+                  <ion-col col-2 style="padding:0px !important">
+                    <img  (click)="menuToggle()"  src="assets/imgs/29.png"  >
+                  </ion-col>
+              </ion-row>
+
+              <ion-row *ngIf="language=='en'">
+                <ion-col col-10></ion-col>
+                <ion-col col-2 style="padding:0px !important">
+                  <img  (click)="menuToggle()"  src="assets/imgs/Artboard – -1.png"  >
+                </ion-col>
+              </ion-row> -->
+              
+      </ion-content>
+
+</ion-menu>
+
+ <!-- Disable swipe-to-go-back because it's poor UX to combine STGB with side menus -->
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

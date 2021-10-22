@@ -1,0 +1,43 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+      <ion-row>
+          <ion-col col-5>
+              <ion-title>{{"Messages"|translate}}</ion-title>
+          </ion-col>
+        <ion-col col-6>
+        </ion-col>
+        <ion-col *ngIf="language=='ar'" col-1 style="font-size: 20px;">
+            <ion-icon name="md-arrow-back" style="color:black" (click)="goback()"></ion-icon>
+        </ion-col>
+
+        <ion-col *ngIf="language=='en'" col-1 style="font-size: 20px;">
+          <ion-icon name="md-arrow-back" style="color:black;transform: rotate(180deg)" (click)="goback()"></ion-icon>
+      </ion-col>
+      </ion-row>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div style="border-radius: 5px; background-color: #c9c8d0;margin-top: 4px;margin-bottom: 5px;">
+        <ion-row>
+          <ion-col col-5 *ngIf="subject!=''">
+            {{subject}}
+          </ion-col>
+          <ion-col col-5 *ngIf="subject==''">
+              {{ "no_Subject"|translate}}
+            </ion-col>
+          <ion-col col-6></ion-col>
+          <ion-col col-1>
+            <img src="assets/imgs/31.png" (click)="remove_message()">
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-9 style="white-space: normal">
+            {{body}}
+          </ion-col>
+          <ion-col col-3 style="white-space: nowrap">
+            {{date}}
+          </ion-col>
+        </ion-row>
+    </div>
+</ion-content>

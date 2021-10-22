@@ -1,0 +1,79 @@
+
+ <ion-header>
+    <ion-navbar  hideBackButton>
+      <ion-row>
+        <ion-col col-9>
+            <ion-title style="margin-top: -9px;">
+              <span> {{"executed"|translate}} </span>
+              {{ "pending requests"|translate}}
+              <span *ngIf="status==1">
+                  {{"accepted"|translate}}
+              </span>
+              <span *ngIf="status==2">
+                  {{"refused"|translate}}
+              </span>
+            </ion-title>
+        </ion-col>
+        <ion-col col-2></ion-col>
+        <ion-col *ngIf="language=='ar'" col-1 style="font-size: 20px;">
+            <ion-icon name="md-arrow-back" style="color:black" (click)="goback()"></ion-icon>
+        </ion-col>
+        <ion-col *ngIf="language=='en'" col-1 style="font-size: 20px;">
+            <ion-icon name="md-arrow-back" style="color:black" (click)="goback()"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-navbar>
+  </ion-header>
+<ion-content padding>
+
+  <div *ngIf="ViewAll_Pending_Requests.length==0" style="text-align: center;margin-top: 10%;font-size: 18px;color: #3f63bb;">
+    صندوق الرسائل فارغ
+  </div>
+
+  <div *ngIf="ViewAll_Pending_Requests.length!=0">
+    <div *ngFor="let request of ViewAll_Pending_Requests" style="border-radius: 5px; background-color: #c9c8d0;margin-top: 4px;margin-bottom: 5px;">
+      
+      <ion-row>
+        <ion-col col-6>
+             {{"request_no"|translate}}
+        </ion-col>
+        <ion-col col-6>
+            {{request.Emp_Req_ID}}
+        </ion-col>
+      </ion-row>  
+   
+      <ion-row>
+          <ion-col col-6>
+               {{"request_type"|translate}}
+          </ion-col>
+          <ion-col col-6>
+             اجازة مفتوحة
+          </ion-col>
+      </ion-row> 
+
+      <ion-row>
+          <ion-col col-6>
+               {{"request_status"|translate}}
+          </ion-col>
+          <ion-col col-6 *ngIf="request.Req_Trace_Status">
+           {{"accepted"|translate}}
+          </ion-col>
+          <ion-col col-6 *ngIf="!request.Req_Trace_Status">
+            {{"refused"|translate}}
+           </ion-col>
+      </ion-row> 
+
+      <ion-row>
+          <ion-col col-6>
+               {{"request_date"|translate}}
+          </ion-col>
+          <ion-col col-6>
+           {{request.Req_Trace_DateTime}}
+          </ion-col>
+      </ion-row> 
+
+  </div>
+  </div>
+
+ 
+</ion-content>

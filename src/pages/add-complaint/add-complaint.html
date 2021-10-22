@@ -1,0 +1,72 @@
+
+
+<ion-header>
+    <ion-navbar hideBackButton>
+      <ion-row>
+          <ion-col col-7 style="padding: 0px">
+              <ion-title>
+                  {{"Employee Complaints"|translate}}
+                  </ion-title>
+          </ion-col>
+        <ion-col col-4>
+        </ion-col>
+        <ion-col *ngIf="language=='ar'" col-1 style="font-size: 20px;">
+            <ion-icon name="md-arrow-back" style="color:black" (click)="goback()"></ion-icon>
+        </ion-col>
+        <ion-col *ngIf="language=='en'" col-1 style="font-size: 20px;">
+          <ion-icon name="md-arrow-back" style="color:black;transform: rotate(180deg)" (click)="goback()"></ion-icon>
+        </ion-col>
+      </ion-row>
+    </ion-navbar>
+</ion-header>
+
+
+
+
+<ion-content padding>
+    <form (ngSubmit)="logForm()" [formGroup]="myform" >
+
+        <div>
+          <ion-row>
+            <ion-col col-5> <h4 style="white-space: nowrap"> {{ "complaint title"|translate}}</h4> </ion-col>
+            <ion-col col-7></ion-col>
+          </ion-row>
+        </div>
+
+        <ion-item>
+          <ion-input [value]="Title" style="direction: rtl;"  formControlName="Complaint_Title" type="text"></ion-input>
+        </ion-item>
+
+        <div style="color: red;text-align: center;font-size: 14px;margin: 12px 0px;" *ngIf="!myform.get('Complaint_Title').valid && myform.get('Complaint_Title').touched">
+            {{  "enter complaint title"|translate}}
+        </div>
+
+        <div>
+            <ion-row>
+              <ion-col col-5> <h4 style="white-space: nowrap"> {{"Content Of Complaint"|translate}}</h4> </ion-col>
+              <ion-col col-7></ion-col>
+            </ion-row>
+        </div>
+
+        <ion-item>
+          <ion-textarea [value]="Message" rows="3" style="direction: rtl;"   formControlName="Complaint_Message" type="text"> </ion-textarea>
+        </ion-item>
+
+        <div style="color: red;text-align: center;font-size: 14px;margin: 12px 0px;" *ngIf="!myform.get('Complaint_Message').valid && myform.get('Complaint_Message').touched">
+              {{ "enter complaint subject"|translate}}
+        </div>
+<ion-row>
+  <ion-col col-4></ion-col>
+  <ion-col col-4>
+      <button style="    margin: 18px 0px;" ion-button  block  round  color="light" type="submit"  >
+          <span *ngIf="come_from=='add_complaint'" style="color: #FBC421"> {{ "save"|translate}}</span>
+          <span *ngIf="come_from=='edit_complaint'" style="color: #FBC421"> {{  "update"|translate}}</span>
+    </button>
+  </ion-col>
+  <ion-col col-4></ion-col>
+</ion-row>
+       
+
+
+       </form>
+</ion-content>

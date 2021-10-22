@@ -1,0 +1,479 @@
+
+
+<ion-header>
+  <ion-navbar  hideBackButton>
+    <ion-row>
+      <ion-col col-6 style="text-align: center;          margin-top: -4px">
+          <ion-title *ngIf="language=='ar'" style="    text-align: right;">  {{"Profile"|translate}} </ion-title>
+          <ion-title *ngIf="language=='en'" style="    text-align: left;">  {{"Profile"|translate}} </ion-title>
+      </ion-col>
+     <ion-col col-2></ion-col>
+     <ion-col col-4>
+         <img src="assets/imgs/app_logo.png">
+     </ion-col>
+    </ion-row>
+    <div style="text-align: center;margin: 0px 10px;">
+      <img id="image"  [src]="base64Image" *ngIf="base64Image!=''" alt="" style="width: 150px;height: 150px;    border-radius: 50%;">
+      <img id="image" src="assets/imgs/images.jpg" *ngIf="base64Image==''" alt="" style="width:150px;height: 150px;    border-radius: 50%;">
+<!--       
+      <img  onerror="this.onerror=null;this.src='assets/imgs/images.jpg';" style= "width: 100%;height: 150px" [src]="base64Image" *ngIf="base64Image.substr(34)!=''">
+      <img  onerror="this.onerror=null;this.src='assets/imgs/images.jpg';" style="width: 100%;height: 150px" *ngIf="base64Image.substr(34)=='' ||base64Image==''" >
+     -->
+      <ion-row style="    margin-top: -13%;margin-right: 27%;">
+        <!-- <ion-col col-2>
+          <ion-icon (click)="upload_image()" name="md-camera" style="  font-size: 23px;color:  white"></ion-icon>
+          
+        </ion-col> -->
+        <ion-col col-2>
+          <ion-label>
+            <ion-icon  name="md-camera" style="  font-size: 23px; color: #3465d9;"></ion-icon>
+          </ion-label> 
+          <input type="file" id="file"  accept='image/*' style=" opacity: 0;  z-index: -1;" (change)="handleFileInput($event,$event.target.files)">
+        </ion-col> 
+        <ion-col col-10></ion-col>
+     </ion-row>
+
+  </div>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content >
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content></ion-refresher-content>
+    </ion-refresher>
+   
+    <div>
+       <ion-row (click)="expand(0)" *ngIf="!expand1_BasicData" style="margin: 0px 10px;   color: white; background:   #3465D9;margin-top: 12px;border-radius: 4px;">
+          <ion-col col-6  style="padding: 0px !important">
+              <h3 *ngIf="language=='ar'" style="  padding: 0px 12px;      margin-bottom: 16px; text-align: right;white-space: nowrap">
+                <span > {{ "BasicData"|translate}}</span>
+              </h3>
+              <h3 *ngIf="language=='en'" style="  padding: 0px 12px;      margin-bottom: 16px;text-align: left;white-space: nowrap ">
+                  <span > {{ "BasicData"|translate}} </span>
+              </h3>
+          </ion-col>
+          <ion-col col-5 style="padding: 0px !important">
+          </ion-col>
+          <ion-col col-1>
+            <ion-icon style="margin-top: 57%;font-size: 22px;" name="ios-arrow-down-outline" ></ion-icon>
+          </ion-col>
+       </ion-row>
+
+       <ion-row (click)="expand(1)" *ngIf="expand1_BasicData" style="margin: 0px 10px;   color: white; background:   #3465D9;margin-top: 12px;border-radius: 4px;">
+          <ion-col col-6  style="padding: 0px !important">
+            <h3 *ngIf="language=='ar'" style="  padding: 0px 12px;margin-bottom: 16px; text-align: right;white-space: nowrap">
+              <span >{{ "BasicData"|translate}}</span>
+            </h3>
+            <h3 *ngIf="language=='en'" style="  padding: 0px 12px;margin-bottom: 16px;text-align: left;white-space: nowrap ">
+                <span > {{ "BasicData"|translate}}</span>
+            </h3>
+          </ion-col>
+          <ion-col col-5 style="padding: 0px !important">
+        </ion-col>
+        <ion-col col-1>
+          <ion-icon style="margin-top: 57%;font-size: 22px;"  name="ios-arrow-up-outline" ></ion-icon>
+        </ion-col>
+      </ion-row>
+
+      <ion-card style="margin:10px" *ngIf="expand1_BasicData">
+        <ion-card-content>
+
+          <ion-row>
+              <ion-col col-6>
+                  <div>
+                    <span style="font-size: 15px;font-weight: bold;white-space: nowrap;">  {{"name"|translate}} : </span>
+                  </div>
+              </ion-col>
+              <ion-col col-6>
+                <div   *ngIf="language=='ar'" style="text-align: right ">
+                  <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">  {{EmployeeData.Emp_Full_Name}}</span>
+                </div>
+                <div  *ngIf="language=='en'" style="text-align: left ">
+                  <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">  {{EmployeeData.Emp_Full_Name}}</span>
+                </div>
+              </ion-col>
+          </ion-row>
+
+          <ion-row>
+             <ion-col col-6>
+                <div>
+                  <span style="font-size: 15px;font-weight: bold;white-space: nowrap;">  {{ "EmpCode"|translate}} : </span>
+                </div>
+             </ion-col>
+            <ion-col col-6>
+              <div  *ngIf="language=='ar'"style="text-align: right ">
+                <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">  {{EmployeeData.Emp_Code}}</span>
+              </div>
+              <div  *ngIf="language=='en'" style="text-align: left ">
+                <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">  {{EmployeeData.Emp_Code}}</span>
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-6>
+               <div>
+                 <span style="font-size: 15px;font-weight: bold;white-space: nowrap;">  {{ "Marital_Status"|translate}} : </span>
+               </div>
+            </ion-col>
+             <ion-col col-6>
+               <div  *ngIf="language=='ar'" style="text-align: right ">
+                 <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">  {{EmployeeData.Marital_Status}}</span>
+               </div>
+               <div  *ngIf="language=='en'" style="text-align: left ">
+                <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">  {{EmployeeData.Marital_Status}}</span>
+              </div>
+             </ion-col>
+          </ion-row>
+
+          <ion-row>
+              <ion-col col-6>
+                <div>
+                  <span style="font-size: 15px;font-weight: bold;white-space: nowrap;">   {{ "ID_Number"|translate}} :</span>
+                </div>
+              </ion-col>
+              <ion-col col-6>
+                <div  *ngIf="language=='ar'" style="text-align: right ">
+                  <span style="font-size: 12px;font-weight: bold;white-space: nowrap;"> {{EmployeeData.Emp_NID}}</span>
+                </div>
+                <div  *ngIf="language=='en'" style="text-align: left ">
+                  <span style="font-size: 12px;font-weight: bold;white-space: nowrap;"> {{EmployeeData.Emp_NID}}</span>
+                </div>
+              </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-6>
+              <div>
+                <span style="font-size: 15px;font-weight: bold;white-space: nowrap;">   {{"Date of Birth"|translate}} :</span>
+              </div>
+            </ion-col>
+            <ion-col col-6>
+              <div  *ngIf="language=='ar'" style="text-align: right ">
+                <span style="font-size: 12px;font-weight: bold;white-space: nowrap;"> {{EmployeeData.Emp_DOB}}</span>
+              </div>
+              <div  *ngIf="language=='en'" style="text-align: left ">
+                <span style="font-size: 12px;font-weight: bold;white-space: nowrap;"> {{EmployeeData.Emp_DOB}}</span>
+              </div>
+            </ion-col>
+          </ion-row>
+ 
+          <ion-row>
+              <ion-col col-6>
+                <div>
+                  <span style="font-size: 15px;font-weight: bold;white-space: nowrap;">   {{ "Nationality"|translate}} :</span>
+                </div>
+              </ion-col>
+              <ion-col col-6>
+                <div *ngIf="language=='ar'"  style="text-align: right ">
+                  <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">  {{EmployeeData.Nationality}}</span>
+                </div>
+                <div *ngIf="language=='en'" style="text-align: left ">
+                  <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">  {{EmployeeData.Nationality}}</span>
+                </div>
+              </ion-col>
+          </ion-row>
+
+          <ion-row>
+            <ion-col col-6>
+              <div>
+                <span style="font-size: 15px;font-weight: bold;white-space: nowrap;">  {{ "Leave days Allowed"|translate}}:</span>
+              </div>
+            </ion-col>
+            <ion-col col-6>
+              <div *ngIf="language=='ar'"  style="text-align: right ">
+                <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">{{EmployeeData.Emp_Vac_Balance}}</span>
+              </div>
+              <div *ngIf="language=='en'" style="text-align: left ">
+                <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">{{EmployeeData.Emp_Vac_Balance}}</span>
+              </div>
+            </ion-col>
+          </ion-row>
+
+          <ion-row>
+          <ion-col col-6>
+            <div>
+              <span style="font-size: 15px;font-weight: bold;white-space: nowrap;">  {{ "Staying Number"|translate}}: </span>
+            </div>
+          </ion-col>
+          <ion-col col-6>
+            <div *ngIf="language=='ar'" style="text-align: right ">
+              <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">{{EmployeeData.Emp_Iqama_No}}</span>
+            </div>
+            <div  *ngIf="language=='en'" style="text-align: left ">
+              <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">{{EmployeeData.Emp_Iqama_No}}</span>
+            </div>
+          </ion-col>
+          </ion-row>
+
+          <ion-row>
+          <ion-col col-6>
+            <div>
+              <span style="font-size: 15px;font-weight: bold;white-space: nowrap;">  {{"Passport No"|translate}} : </span>
+            </div>
+          </ion-col>
+          <ion-col col-6>
+            <div *ngIf="language=='ar'" style="text-align: right ">
+              <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">{{EmployeeData.Emp_Vac_Balance}}</span>
+            </div>
+            <div *ngIf="language=='en'" style="text-align: left ">
+              <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">{{EmployeeData.Emp_Vac_Balance}}</span>
+            </div>
+          </ion-col>
+         </ion-row>
+
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <div  *ngIf="contacts.length!=0">
+
+
+        <ion-row (click)="expand1(0)" *ngIf="!expand1_Contact_Info" style="     margin: 0px 10px;   color: white; background:   #3465D9;margin-top: 12px;border-radius: 4px;">
+          <ion-col col-6  style="padding: 0px !important">
+              <h3 *ngIf="language=='ar'" style="  padding: 0px 12px;      margin-bottom: 16px; text-align: right;white-space: nowrap">
+               <span >
+              {{ "Contact Info"|translate}}
+               </span>
+             </h3>
+             <h3 *ngIf="language=='en'" style="  padding: 0px 12px;      margin-bottom: 16px; text-align: left;white-space: nowrap">
+                <span >
+               {{ "Contact Info"|translate}}
+                </span>
+              </h3>
+          </ion-col>
+          <ion-col col-5 style="padding: 0px !important">
+
+          </ion-col>
+          <ion-col col-1>
+            <ion-icon style="margin-top: 57%;font-size: 22px;" name="ios-arrow-down-outline" ></ion-icon>
+          </ion-col>
+        </ion-row>
+
+        
+        <ion-row (click)="expand1(1)" *ngIf="expand1_Contact_Info" style="     margin: 0px 10px;   color: white; background:   #3465D9;margin-top: 12px;border-radius: 4px;">
+          <ion-col col-6  style="padding: 0px !important">
+              <h3 *ngIf="language=='ar'" style="  padding: 0px 12px;      margin-bottom: 16px; text-align: right;white-space: nowrap">
+               <span >
+              {{ "Contact Info"|translate}}
+               </span>
+             </h3>
+             <h3 *ngIf="language=='en'" style="  padding: 0px 12px;      margin-bottom: 16px; text-align: left;white-space: nowrap">
+                <span >
+               {{ "Contact Info"|translate}}
+                </span>
+              </h3>
+          </ion-col>
+          <ion-col col-5 style="padding: 0px !important">
+
+         </ion-col>
+         <ion-col col-1>
+          <ion-icon style="margin-top: 57%;font-size: 22px;" name="ios-arrow-up-outline" ></ion-icon>
+         </ion-col>
+        </ion-row>
+
+        <ion-card *ngIf="expand1_Contact_Info" style="margin:10px">
+          <ion-card-content>
+              <ion-row *ngFor="let contact of contacts">
+              <ion-col col-6>
+                  <div>
+                      <span style="font-size: 15px;font-weight: bold;white-space: nowrap;"> {{contact.Contact_Type_Name}} </span>
+                  </div>
+              </ion-col>
+              <ion-col col-6>
+                  <div>
+                      <span style="font-size: 12px;font-weight: bold;white-space: nowrap;">  {{contact.Emp_Contact_Contact}}</span>
+                  </div>
+              </ion-col>
+
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+    </div>
+
+    <div *ngIf="Address.length!=0">
+
+
+        <ion-row (click)="expand2(0)" *ngIf="!expand1_Address" style=" margin: 0px 10px;   color: white; background:   #3465D9;margin-top: 12px;border-radius: 4px;">
+          <ion-col col-6  style="padding: 0px !important">
+              <h3 *ngIf="language=='ar'" style="  padding: 0px 12px;      margin-bottom: 16px; text-align: right;white-space: nowrap">
+                  <span >
+               {{"Address"|translate}}
+               </span>
+             </h3>
+             <h3 *ngIf="language=='en'" style="  padding: 0px 12px;      margin-bottom: 16px; text-align:left;white-space: nowrap">
+                <span >
+             {{"Address"|translate}}
+             </span>
+           </h3>
+          </ion-col>
+          <ion-col col-5 style="padding: 0px !important">
+
+         </ion-col>
+         <ion-col col-1>
+          <ion-icon style="margin-top: 57%;font-size: 22px;" name="ios-arrow-down-outline" ></ion-icon>
+         </ion-col>
+        </ion-row>
+
+        <ion-row (click)="expand2(1)" *ngIf="expand1_Address" style=" margin: 0px 10px;   color: white; background:   #3465D9;margin-top: 12px;border-radius: 4px;">
+          <ion-col col-6  style="padding: 0px !important">
+              <h3 *ngIf="language=='ar'" style="  padding: 0px 12px;      margin-bottom: 16px; text-align: right;white-space: nowrap">
+                  <span >
+               {{"Address"|translate}}
+               </span>
+             </h3>
+             <h3 *ngIf="language=='en'" style="  padding: 0px 12px;      margin-bottom: 16px; text-align:left;white-space: nowrap">
+                <span >
+             {{"Address"|translate}}
+             </span>
+           </h3>
+          </ion-col>
+          <ion-col col-5 style="padding: 0px !important">
+
+         </ion-col>
+         <ion-col col-1>
+          <ion-icon style="margin-top: 57%;font-size: 22px;" name="ios-arrow-up-outline" ></ion-icon>
+         </ion-col>
+        </ion-row>
+
+        <ion-card *ngIf="expand1_Address" style="margin:10px">
+          <ion-card-content>
+              <ion-row >
+                  <ion-col col-6>
+                      <div>
+                          <span style="font-size: 15px;font-weight: bold;white-space: nowrap;">{{  "Title"|translate}}	 </span>
+                      </div>
+                  </ion-col>
+
+                  <ion-col col-6>
+                      <div>
+                          <span style="font-size: 15px;font-weight: bold;white-space: nowrap;">  {{ "ZIP"|translate}} </span>
+                      </div>
+                  </ion-col>
+              </ion-row>
+              <ion-row *ngFor="let _Address of Address">
+                  <ion-col col-6>
+                      <div *ngIf="_Address.Emp_Add_Address!=null">
+                          <span style="font-size: 12px;font-weight: bold;white-space: normal;"> {{_Address.Emp_Add_Address}} </span>
+                      </div>
+                  </ion-col>
+
+                  <ion-col col-6>
+                      <div *ngIf="_Address.Zip_Code!=null">
+                          <span style="font-size: 12px;font-weight: bold;white-space: normal;">  {{_Address.Zip_Code}}</span>
+                      </div>
+                  </ion-col>
+             </ion-row>
+
+          </ion-card-content>
+        </ion-card>
+    </div>
+
+    <div  *ngIf="Postions.length!=0">
+
+        <ion-row (click)="expand3(0)" *ngIf="!expand1_Employee_Position" style=" margin: 0px 10px;   color: white; background:   #3465D9;margin-top: 12px;border-radius: 4px;">
+            <ion-col col-6  style="padding: 0px !important">
+                <h3 *ngIf="language=='ar'" style="  padding: 0px 12px;      margin-bottom: 16px; text-align: right;white-space: nowrap">
+                    <span >
+                 {{ "Employee Position"|translate}}
+                </span>
+              </h3>
+              <h3 *ngIf="language=='en'" style="  padding: 0px 12px;      margin-bottom: 16px; text-align: left;white-space: nowrap">
+                  <span >
+               {{ "Employee Position"|translate}}
+              </span>
+            </h3>
+            </ion-col>
+            <ion-col col-5 style="padding: 0px !important">
+            </ion-col>
+            <ion-col col-1>
+              <ion-icon style="margin-top: 57%;font-size: 22px;" name="ios-arrow-down-outline" ></ion-icon>
+             </ion-col>
+        </ion-row>
+
+        <ion-row (click)="expand3(1)" *ngIf="expand1_Employee_Position" style=" margin: 0px 10px;   color: white; background:   #3465D9;margin-top: 12px;border-radius: 4px;">
+          <ion-col col-6  style="padding: 0px !important">
+              <h3 *ngIf="language=='ar'" style="  padding: 0px 12px;      margin-bottom: 16px; text-align: right;white-space: nowrap">
+                  <span >
+               {{ "Employee Position"|translate}}
+              </span>
+            </h3>
+            <h3 *ngIf="language=='en'" style="  padding: 0px 12px;      margin-bottom: 16px; text-align: left;white-space: nowrap">
+                <span >
+             {{ "Employee Position"|translate}}
+            </span>
+          </h3>
+          </ion-col>
+          <ion-col col-5 style="padding: 0px !important">
+          </ion-col>
+          <ion-col col-1>
+            <ion-icon style="margin-top: 57%;font-size: 22px;" name="ios-arrow-up-outline" ></ion-icon>
+           </ion-col>
+        </ion-row>
+
+        <ion-card *ngIf="expand1_Employee_Position" style=" margin:10px;">
+          <ion-card-content>
+              <ion-row>
+                  <ion-col col-4>
+                      <div>
+                          <span style="font-size: 15px;font-weight: bold;white-space: normal;">{{"Administration Name"|translate}}		 </span>
+                      </div>
+                  </ion-col>
+                  <ion-col col-4>
+                      <div>
+                          <span style="font-size: 15px;font-weight: bold;white-space: normal;"> {{"Job title"|translate}}	</span>
+                      </div>
+                  </ion-col>
+                  <ion-col col-4>
+                      <div>
+                          <span style="font-size: 15px;font-weight: bold;white-space: normal;"> {{ "Joining Date"|translate}}		</span>
+                      </div>
+                  </ion-col>
+              </ion-row>
+              <ion-row *ngFor="let Postion of Postions">
+                  <ion-col col-4>
+                      <div *ngIf="Postion.Dept_Name!=null">
+                          <span style="font-size: 12px;font-weight: bold;white-space: normal;"> {{Postion.Dept_Name}} </span>
+                      </div>
+                  </ion-col>
+                  <ion-col col-4>
+                      <div *ngIf="Postion.JobTitle_Name!=null">
+                          <span style="font-size: 12px;font-weight: bold;white-space: normal;">  {{Postion.JobTitle_Name}}</span>
+                      </div>
+                  </ion-col>
+                  <ion-col col-4>
+                      <div *ngIf="Postion.Emp_Position_JoinDate!=null">
+                          <span style="font-size: 12px;font-weight: bold;white-space: normal;">  {{Postion.Emp_Position_JoinDate}}</span>
+                      </div>
+                  </ion-col>
+             </ion-row>
+
+          </ion-card-content>
+        </ion-card>
+    </div>
+
+
+   
+</ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <input type="file"  (change)="getFileDetails($event)" id="fileInput"/>
+        <label style="     margin-top: 90px;   position: absolute;" for="fileInput" icon-only >
+          <ion-icon name="md-camera" style=" position: relative; font-size: 23px;color:  #3465D9"></ion-icon>
+        </label>
+          <img *ngIf="!imgURL" src="assets/imgs/images.jpg" id="profilePhoto" style="width: 100px;height: 100px; border-radius: 50%;">
+          <img *ngIf="imgURL" [src]="imgURL" id="profilePhoto" style="width: 100px;height: 100px; border-radius: 50%;"> -->

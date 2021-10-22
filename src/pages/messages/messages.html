@@ -1,0 +1,960 @@
+ <ion-header>
+      <ion-navbar  hideBackButton>
+        <ion-row>
+          <ion-col col-6>
+              <ion-title style="margin-top: -9px;">{{ "Messages"|translate}}</ion-title>
+          </ion-col>
+          <ion-col col-2></ion-col>
+          <ion-col col-4>
+            <img src="assets/imgs/app_logo.png">
+          </ion-col>
+        </ion-row>
+      </ion-navbar>
+    </ion-header>
+
+
+<ion-content padding>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content  refreshingSpinner="circles"></ion-refresher-content>
+    </ion-refresher>
+
+   <div *ngIf="in;else out">
+          <div  *ngIf="status=='expand' && status1=='expand'"  style="height: 62%; background-color: #3465D9;border-radius: 6px">
+              <ion-row>
+                <ion-col col-6>
+                  <button ion-button block color="mycolor" style="border-radius: 6px" (click)="inbox()">
+                      <span style="color: white;font-size: 20px;"> {{"inbox"|translate}} </span>
+                  </button>
+                </ion-col>
+                <ion-col col-6>
+                    <button ion-button block color="anothercolor2" style="border-radius: 6px" (click)="OutBox()"  >
+                      <span style="color: white;font-size: 20px;"> {{"outbox"|translate}} </span>
+                    </button>
+                </ion-col>
+              </ion-row>
+
+              <div>
+                  <div  *ngIf="status=='collapse'"  (click)="expand('collapse')" style="     border-radius: 5px;margin-top: 10px">
+                      <ion-row>
+                        <ion-col col-4>
+                            <h3 style="    margin-top: 7px;color:white">   {{"Period Date"|translate}}        </h3>
+                        </ion-col>
+                        <ion-col col-7></ion-col>
+                        <ion-col col-1 >
+                          <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle;    color: white;"  name="ios-arrow-down-outline"></ion-icon>
+                        </ion-col>
+                      </ion-row>
+                  </div>
+              
+                  <div  *ngIf="status=='expand'" (click)="expand('expand')" style="     border-radius: 5px;;margin-top: 10px" >
+                    <ion-row>
+                      <ion-col col-4>
+                          <h3 style="    margin-top: 7px;   color: white;">   {{"Period Date"|translate}}        </h3>
+                      </ion-col>
+                      <ion-col col-7></ion-col>
+                      <ion-col col-1 >
+                        <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle;    color: white;" name="ios-arrow-up-outline"></ion-icon>
+                      </ion-col>
+                    </ion-row>
+                  </div>
+          
+                  <div   *ngIf="status=='expand'" id="date_from"  style="margin-right: 3px; margin-left: 3px;  border: 1px solid #928a8a;margin-top: 4px; border-radius: 5px;height: 80px;">
+                      <ion-row id="georgian" style="margin-top:-5px;">
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{"year"|translate}}</ion-label>
+                                  <ion-select  okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="year_from"   (ionChange)="set_georgian_year()"  placeholder="{{'year'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of year_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                  </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "month"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="month_from"  (ionChange)="set_georgian_month()" placeholder="{{'month'|translate}}" style="width:100%">
+                                      <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                        {{val.name}}
+                                      </ion-option>
+                                  </ion-select>
+                              </ion-item>
+                            </ion-col>
+                            <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "day"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="day_from" (ionChange)="set_georgian_day()" placeholder="{{'day'|translate}}" style="width:100%">
+                                      <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                        {{val.name}}
+                                      </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-3 style=" color:white;   text-align: center;"> {{"gregorian"|translate}}</ion-col>
+                      </ion-row>
+          
+                      <ion-row id="higri" style="margin-top:-5px;">
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{"year"|translate}}</ion-label>
+                                  <ion-select  okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_year_from"  (ionChange)="set_higri_year()" placeholder="{{'year'|translate}}" style="width:100%">
+                                      <ion-option *ngFor="let val of higri_year_values" [value]='val.value'>
+                                        {{val.name}}
+                                      </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-3>
+                                <ion-item>
+                                    <ion-label>{{ "month"|translate}}</ion-label>
+                                    <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_month_from" (ionChange)="set_higri_month()" placeholder="{{'month'|translate}}" style="width:100%">
+                                      <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                        {{val.name}}
+                                      </ion-option>
+                                    </ion-select>
+                                  </ion-item>
+                            </ion-col>
+                            <ion-col col-3>
+                                <ion-item>
+                                    <ion-label>{{ "day"|translate}}</ion-label>
+                                    <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}" [(ngModel)]="higri_day_from" (ionChange)="set_higri_day()"placeholder="{{'day'|translate}}" style="width:100%">
+                                      <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                        {{val.name}}
+                                      </ion-option>
+                                    </ion-select>
+                                  </ion-item>
+                            </ion-col>
+                            <ion-col col-3 style=" color:white;  text-align: center;"> {{"higri"|translate}}</ion-col>
+                        </ion-row>
+                  </div>
+          
+                  <div  *ngIf="status1=='collapse'"  (click)="expand1('collapse')" style="  border-radius: 5px;;margin-top: 10px">
+                    <ion-row>
+                      <ion-col col-4>
+                          <h3 style="    margin-top: 7px;color: white;">   {{"Period End"|translate}}       </h3>
+                      </ion-col>
+                      <ion-col col-7></ion-col>
+                      <ion-col col-1 >
+                        <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle; color: white;"  name="ios-arrow-down-outline"></ion-icon>
+                      </ion-col>
+                    </ion-row>
+                  </div>
+        
+                  <div  *ngIf="status1=='expand'" (click)="expand1('expand')"  style=" border-radius: 5px;margin-top: 10px" >
+                    <ion-row>
+                      <ion-col col-4>
+                          <h3 style="    margin-top: 7px;color:white">   {{"Period End"|translate}}        </h3>
+                      </ion-col>
+                      <ion-col col-7></ion-col>
+                      <ion-col col-1 >
+                        <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle; color: white;" name="ios-arrow-up-outline"></ion-icon>
+                      </ion-col>
+                    </ion-row>
+                  </div>
+          
+                  <div  *ngIf="status1=='expand'" id="date_to"  style="     margin-right: 3px;margin-left: 3px;border: 1px solid #928a8a;margin-top: 4px; border-radius: 5px;height:80px;">
+                      <ion-row id="georgian" style="margin-top:-5px;">
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{"year"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="year_to" (ionChange)="set_georgian_year_to()" placeholder="{{'year'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of year_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "month"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="month_to" (ionChange)="set_georgian_month_to()" placeholder="{{'month'|translate}}" style="width:100%">
+                                      <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                        {{val.name}}
+                                      </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "day"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}" [(ngModel)]="day_to" (ionChange)="set_georgian_day_to()" placeholder="{{'day'|translate}}" style="width:100%">
+                                      <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                        {{val.name}}
+                                      </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-3 style=" color:white;   text-align: center;">{{"gregorian"|translate}}</ion-col>
+                      </ion-row>
+          
+                      <ion-row id="higri" style="margin-top:-5px;">
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{"year"|translate}}</ion-label>
+                                  <ion-select  okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_year_to" (ionChange)="set_higri_year_to()"  placeholder="{{'year'|translate}}" style="width:100%">
+                                      <ion-option *ngFor="let val of higri_year_values" [value]='val.value'>
+                                        {{val.name}}
+                                      </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                            </ion-col>
+                            <ion-col col-3>
+                                <ion-item>
+                                    <ion-label>{{ "month"|translate}}</ion-label>
+                                    <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_month_to" (ionChange)="set_higri_month_to()" placeholder="{{'month'|translate}}" style="width:100%">
+                                      <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                        {{val.name}}
+                                      </ion-option>
+                                    </ion-select>
+                                  </ion-item>
+                            </ion-col>
+                            <ion-col col-3>
+                                <ion-item>
+                                    <ion-label>{{ "day"|translate}}</ion-label>
+                                    <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_day_to" (ionChange)="set_higri_day_to()"  placeholder="{{'day'|translate}}" style="width:100%">
+                                      <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                        {{val.name}}
+                                      </ion-option>
+                                    </ion-select>
+                                  </ion-item>
+                            </ion-col>
+                            <ion-col col-3 style=" color:white;   text-align: center;"> {{"higri"|translate}}</ion-col>
+                        </ion-row>
+                  </div>
+              
+                  <div>
+                    <ion-item>
+                      <ion-label>
+                        <h2 style="font-size: 18px;font-weight: bold;  color: white;">{{"ISREAD"|translate}}</h2>
+                      </ion-label>
+                      <ion-checkbox  value="connection.Emp_ID" [(ngModel)]="is_read" ></ion-checkbox>
+                    </ion-item>
+                  </div>
+              </div>
+        
+          </div>
+
+          <div  *ngIf="status=='expand' && status1=='collapse'"  style="height: 44%; background-color: #3465D9;border-radius: 6px">
+            <ion-row>
+              <ion-col col-6>
+                <button ion-button block color="mycolor" style="border-radius: 6px" (click)="inbox()">
+                    <span style="color: white;font-size: 20px;"> {{"inbox"|translate}} </span>
+                </button>
+              </ion-col>
+              <ion-col col-6>
+                  <button ion-button block color="anothercolor2" style="border-radius: 6px" (click)="OutBox()"  >
+                    <span style="color: white;font-size: 20px;"> {{"outbox"|translate}} </span>
+                  </button>
+              </ion-col>
+            </ion-row>
+
+            <div>
+                <div  *ngIf="status=='collapse'"  (click)="expand('collapse')" style="     border-radius: 5px;margin-top: 10px">
+                    <ion-row>
+                      <ion-col col-4>
+                          <h3 style="    margin-top: 7px;color:white">   {{"Period Date"|translate}}        </h3>
+                      </ion-col>
+                      <ion-col col-7></ion-col>
+                      <ion-col col-1 >
+                        <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle;    color: white;"  name="ios-arrow-down-outline"></ion-icon>
+                      </ion-col>
+                    </ion-row>
+                </div>
+            
+                <div  *ngIf="status=='expand'" (click)="expand('expand')" style="     border-radius: 5px;;margin-top: 10px" >
+                  <ion-row>
+                    <ion-col col-4>
+                        <h3 style="    margin-top: 7px;   color: white;">   {{"Period Date"|translate}}        </h3>
+                    </ion-col>
+                    <ion-col col-7></ion-col>
+                    <ion-col col-1 >
+                      <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle;    color: white;" name="ios-arrow-up-outline"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </div>
+        
+                <div   *ngIf="status=='expand'" id="date_from"  style="margin-right: 3px; margin-left: 3px;  border: 1px solid #928a8a;margin-top: 4px; border-radius: 5px;height: 80px;">
+                    <ion-row id="georgian" style="margin-top:-5px;">
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{"year"|translate}}</ion-label>
+                                <ion-select  okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="year_from"   (ionChange)="set_georgian_year()"  placeholder="{{'year'|translate}}" style="width:100%">
+                                  <ion-option *ngFor="let val of year_values" [value]='val.value'>
+                                    {{val.name}}
+                                  </ion-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{ "month"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="month_from"  (ionChange)="set_georgian_month()" placeholder="{{'month'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                            </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{ "day"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="day_from" (ionChange)="set_georgian_day()" placeholder="{{'day'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3 style=" color:white;  text-align: center;"> {{"gregorian"|translate}}</ion-col>
+                    </ion-row>
+        
+                    <ion-row id="higri" style="margin-top:-5px;">
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{"year"|translate}}</ion-label>
+                                <ion-select  okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_year_from"  (ionChange)="set_higri_year()" placeholder="{{'year'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of higri_year_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "month"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_month_from" (ionChange)="set_higri_month()" placeholder="{{'month'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "day"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}" [(ngModel)]="higri_day_from" (ionChange)="set_higri_day()"placeholder="{{'day'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                          </ion-col>
+                          <ion-col col-3 style=" color:white; text-align: center;"> {{"higri"|translate}}</ion-col>
+                      </ion-row>
+                </div>
+        
+                <div  *ngIf="status1=='collapse'"  (click)="expand1('collapse')" style="  border-radius: 5px;;margin-top: 10px">
+                  <ion-row>
+                    <ion-col col-4>
+                        <h3 style="    margin-top: 7px;color: white;">   {{"Period End"|translate}}       </h3>
+                    </ion-col>
+                    <ion-col col-7></ion-col>
+                    <ion-col col-1 >
+                      <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle; color: white;"  name="ios-arrow-down-outline"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </div>
+      
+                <div  *ngIf="status1=='expand'" (click)="expand1('expand')"  style=" border-radius: 5px;margin-top: 10px" >
+                  <ion-row>
+                    <ion-col col-4>
+                        <h3 style="    margin-top: 7px;color:white">   {{"Period End"|translate}}        </h3>
+                    </ion-col>
+                    <ion-col col-7></ion-col>
+                    <ion-col col-1 >
+                      <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle; color: white;" name="ios-arrow-up-outline"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </div>
+        
+                <div  *ngIf="status1=='expand'" id="date_to"  style="     margin-right: 3px;margin-left: 3px;border: 1px solid #928a8a;margin-top: 4px; border-radius: 5px;height:80px;">
+                    <ion-row id="georgian" style="margin-top:-5px;">
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{"year"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="year_to" (ionChange)="set_georgian_year_to()" placeholder="{{'year'|translate}}" style="width:100%">
+                                  <ion-option *ngFor="let val of year_values" [value]='val.value'>
+                                    {{val.name}}
+                                  </ion-option>
+                                </ion-select>
+                              </ion-item>
+                        </ion-col>
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{ "month"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="month_to" (ionChange)="set_georgian_month_to()" placeholder="{{'month'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{ "day"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}" [(ngModel)]="day_to" (ionChange)="set_georgian_day_to()" placeholder="{{'day'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3 style=" color:white;   text-align: center;">{{"gregorian"|translate}}</ion-col>
+                    </ion-row>
+        
+                    <ion-row id="higri" style="margin-top:-5px;">
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{"year"|translate}}</ion-label>
+                                <ion-select  okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_year_to" (ionChange)="set_higri_year_to()"  placeholder="{{'year'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of higri_year_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "month"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_month_to" (ionChange)="set_higri_month_to()" placeholder="{{'month'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "day"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_day_to" (ionChange)="set_higri_day_to()"  placeholder="{{'day'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                          </ion-col>
+                          <ion-col col-3 style="color:white;    text-align: center;"> {{"higri"|translate}}</ion-col>
+                      </ion-row>
+                </div>
+            
+                <div>
+                  <ion-item>
+                    <ion-label>
+                      <h2 style="font-size: 18px;font-weight: bold;  color: white;">{{"ISREAD"|translate}}</h2>
+                    </ion-label>
+                    <ion-checkbox  value="connection.Emp_ID" [(ngModel)]="is_read" ></ion-checkbox>
+                  </ion-item>
+                </div>
+            </div>
+      
+          </div>
+
+          <div  *ngIf="status=='collapse' && status1=='expand'"  style="height: 44%; background-color: #3465D9;border-radius: 6px">
+            <ion-row>
+              <ion-col col-6>
+                <button ion-button block color="mycolor" style="border-radius: 6px" (click)="inbox()">
+                    <span style="color: white;font-size: 20px;"> {{"inbox"|translate}} </span>
+                </button>
+              </ion-col>
+              <ion-col col-6>
+                  <button ion-button block color="anothercolor2" style="border-radius: 6px" (click)="OutBox()"  >
+                    <span style="color: white;font-size: 20px;"> {{"outbox"|translate}} </span>
+                  </button>
+              </ion-col>
+            </ion-row>
+
+            <div>
+                <div  *ngIf="status=='collapse'"  (click)="expand('collapse')" style="     border-radius: 5px;margin-top: 10px">
+                    <ion-row>
+                      <ion-col col-4>
+                          <h3 style="    margin-top: 7px;color:white">   {{"Period Date"|translate}}        </h3>
+                      </ion-col>
+                      <ion-col col-7></ion-col>
+                      <ion-col col-1 >
+                        <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle;    color: white;"  name="ios-arrow-down-outline"></ion-icon>
+                      </ion-col>
+                    </ion-row>
+                </div>
+            
+                <div  *ngIf="status=='expand'" (click)="expand('expand')" style="     border-radius: 5px;;margin-top: 10px" >
+                  <ion-row>
+                    <ion-col col-4>
+                        <h3 style="    margin-top: 7px;   color: white;">   {{"Period Date"|translate}}        </h3>
+                    </ion-col>
+                    <ion-col col-7></ion-col>
+                    <ion-col col-1 >
+                      <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle;    color: white;" name="ios-arrow-up-outline"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </div>
+        
+                <div   *ngIf="status=='expand'" id="date_from"  style="margin-right: 3px; margin-left: 3px;  border: 1px solid #928a8a;margin-top: 4px; border-radius: 5px;height: 80px;">
+                    <ion-row id="georgian" style="margin-top:-5px;">
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{"year"|translate}}</ion-label>
+                                <ion-select  okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="year_from"   (ionChange)="set_georgian_year()"  placeholder="{{'year'|translate}}" style="width:100%">
+                                  <ion-option *ngFor="let val of year_values" [value]='val.value'>
+                                    {{val.name}}
+                                  </ion-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{ "month"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="month_from"  (ionChange)="set_georgian_month()" placeholder="{{'month'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                            </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{ "day"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="day_from" (ionChange)="set_georgian_day()" placeholder="{{'day'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3 style="  color:white;  text-align: center;"> {{"gregorian"|translate}}</ion-col>
+                    </ion-row>
+        
+                    <ion-row id="higri" style="margin-top:-5px;">
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{"year"|translate}}</ion-label>
+                                <ion-select  okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_year_from"  (ionChange)="set_higri_year()" placeholder="{{'year'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of higri_year_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "month"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_month_from" (ionChange)="set_higri_month()" placeholder="{{'month'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "day"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}" [(ngModel)]="higri_day_from" (ionChange)="set_higri_day()"placeholder="{{'day'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                          </ion-col>
+                          <ion-col col-3 style="  color:white;  text-align: center;"> {{"higri"|translate}}</ion-col>
+                      </ion-row>
+                </div>
+        
+                <div  *ngIf="status1=='collapse'"  (click)="expand1('collapse')" style="  border-radius: 5px;;margin-top: 10px">
+                  <ion-row>
+                    <ion-col col-4>
+                        <h3 style="    margin-top: 7px;color: white;">   {{"Period End"|translate}}       </h3>
+                    </ion-col>
+                    <ion-col col-7></ion-col>
+                    <ion-col col-1 >
+                      <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle; color: white;"  name="ios-arrow-down-outline"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </div>
+      
+                <div  *ngIf="status1=='expand'" (click)="expand1('expand')"  style=" border-radius: 5px;margin-top: 10px" >
+                  <ion-row>
+                    <ion-col col-4>
+                        <h3 style="    margin-top: 7px;color:white">   {{"Period End"|translate}}        </h3>
+                    </ion-col>
+                    <ion-col col-7></ion-col>
+                    <ion-col col-1 >
+                      <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle; color: white;" name="ios-arrow-up-outline"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </div>
+        
+                <div  *ngIf="status1=='expand'" id="date_to"  style="     margin-right: 3px;margin-left: 3px;border: 1px solid #928a8a;margin-top: 4px; border-radius: 5px;height:80px;">
+                    <ion-row id="georgian" style="margin-top:-5px;">
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{"year"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="year_to" (ionChange)="set_georgian_year_to()" placeholder="{{'year'|translate}}" style="width:100%">
+                                  <ion-option *ngFor="let val of year_values" [value]='val.value'>
+                                    {{val.name}}
+                                  </ion-option>
+                                </ion-select>
+                              </ion-item>
+                        </ion-col>
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{ "month"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="month_to" (ionChange)="set_georgian_month_to()" placeholder="{{'month'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{ "day"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}" [(ngModel)]="day_to" (ionChange)="set_georgian_day_to()" placeholder="{{'day'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3 style="color:white;    text-align: center;">{{"gregorian"|translate}}</ion-col>
+                    </ion-row>
+        
+                    <ion-row id="higri" style="margin-top:-5px;">
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{"year"|translate}}</ion-label>
+                                <ion-select  okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_year_to" (ionChange)="set_higri_year_to()"  placeholder="{{'year'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of higri_year_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "month"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_month_to" (ionChange)="set_higri_month_to()" placeholder="{{'month'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "day"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_day_to" (ionChange)="set_higri_day_to()"  placeholder="{{'day'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                          </ion-col>
+                          <ion-col col-3 style=" color:white;    text-align: center;"> {{"higri"|translate}}</ion-col>
+                      </ion-row>
+                </div>
+            
+                <div>
+                  <ion-item>
+                    <ion-label>
+                      <h2 style="font-size: 18px;font-weight: bold;  color: white;">{{"ISREAD"|translate}}</h2>
+                    </ion-label>
+                    <ion-checkbox  value="connection.Emp_ID" [(ngModel)]="is_read" ></ion-checkbox>
+                  </ion-item>
+                </div>
+            </div>
+      
+          </div>
+
+          <div  *ngIf="status=='collapse' && status1=='collapse'"  style="height: 30%; background-color: #3465D9;border-radius: 6px">
+            <ion-row>
+              <ion-col col-6>
+                <button ion-button block color="mycolor" style="border-radius: 6px" (click)="inbox()">
+                    <span style="color: white;font-size: 20px;"> {{"inbox"|translate}} </span>
+                </button>
+              </ion-col>
+              <ion-col col-6>
+                  <button ion-button block color="anothercolor2" style="border-radius: 6px" (click)="OutBox()"  >
+                    <span style="color: white;font-size: 20px;"> {{"outbox"|translate}} </span>
+                  </button>
+              </ion-col>
+            </ion-row>
+
+            <div>
+                <div  *ngIf="status=='collapse'"  (click)="expand('collapse')" style="     border-radius: 5px;margin-top: 10px">
+                    <ion-row>
+                      <ion-col col-4>
+                          <h3 style="    margin-top: 7px;color:white">   {{"Period Date"|translate}}        </h3>
+                      </ion-col>
+                      <ion-col col-7></ion-col>
+                      <ion-col col-1 >
+                        <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle;    color: white;"  name="ios-arrow-down-outline"></ion-icon>
+                      </ion-col>
+                    </ion-row>
+                </div>
+            
+                <div  *ngIf="status=='expand'" (click)="expand('expand')" style="     border-radius: 5px;;margin-top: 10px" >
+                  <ion-row>
+                    <ion-col col-4>
+                        <h3 style="    margin-top: 7px;   color: white;">   {{"Period Date"|translate}}        </h3>
+                    </ion-col>
+                    <ion-col col-7></ion-col>
+                    <ion-col col-1 >
+                      <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle;    color: white;" name="ios-arrow-up-outline"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </div>
+        
+                <div   *ngIf="status=='expand'" id="date_from"  style="margin-right: 3px; margin-left: 3px;  border: 1px solid #928a8a;margin-top: 4px; border-radius: 5px;height: 80px;">
+                    <ion-row id="georgian" style="margin-top:-5px;">
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{"year"|translate}}</ion-label>
+                                <ion-select  okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="year_from"   (ionChange)="set_georgian_year()"  placeholder="{{'year'|translate}}" style="width:100%">
+                                  <ion-option *ngFor="let val of year_values" [value]='val.value'>
+                                    {{val.name}}
+                                  </ion-option>
+                                </ion-select>
+                            </ion-item>
+                        </ion-col>
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{ "month"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="month_from"  (ionChange)="set_georgian_month()" placeholder="{{'month'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                            </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{ "day"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="day_from" (ionChange)="set_georgian_day()" placeholder="{{'day'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3 style=" color:white;  text-align: center;"> {{"gregorian"|translate}}</ion-col>
+                    </ion-row>
+        
+                    <ion-row id="higri" style="margin-top:-5px;">
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{"year"|translate}}</ion-label>
+                                <ion-select  okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_year_from"  (ionChange)="set_higri_year()" placeholder="{{'year'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of higri_year_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "month"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_month_from" (ionChange)="set_higri_month()" placeholder="{{'month'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "day"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}" [(ngModel)]="higri_day_from" (ionChange)="set_higri_day()"placeholder="{{'day'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                          </ion-col>
+                          <ion-col col-3 style="  color:white;  text-align: center;"> {{"higri"|translate}}</ion-col>
+                      </ion-row>
+                </div>
+        
+                <div  *ngIf="status1=='collapse'"  (click)="expand1('collapse')" style="  border-radius: 5px;;margin-top: 10px">
+                  <ion-row>
+                    <ion-col col-4>
+                        <h3 style="    margin-top: 7px;color: white;">   {{"Period End"|translate}}       </h3>
+                    </ion-col>
+                    <ion-col col-7></ion-col>
+                    <ion-col col-1 >
+                      <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle; color: white;"  name="ios-arrow-down-outline"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </div>
+      
+                <div  *ngIf="status1=='expand'" (click)="expand1('expand')"  style=" border-radius: 5px;margin-top: 10px" >
+                  <ion-row>
+                    <ion-col col-4>
+                        <h3 style="    margin-top: 7px;color:white">   {{"Period End"|translate}}        </h3>
+                    </ion-col>
+                    <ion-col col-7></ion-col>
+                    <ion-col col-1 >
+                      <ion-icon style="display: inline;font-size: 2.5rem;    vertical-align: middle; color: white;" name="ios-arrow-up-outline"></ion-icon>
+                    </ion-col>
+                  </ion-row>
+                </div>
+        
+                <div  *ngIf="status1=='expand'" id="date_to"  style="     margin-right: 3px;margin-left: 3px;border: 1px solid #928a8a;margin-top: 4px; border-radius: 5px;height:80px;">
+                    <ion-row id="georgian" style="margin-top:-15px;">
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{"year"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="year_to" (ionChange)="set_georgian_year_to()" placeholder="{{'year'|translate}}" style="width:100%">
+                                  <ion-option *ngFor="let val of year_values" [value]='val.value'>
+                                    {{val.name}}
+                                  </ion-option>
+                                </ion-select>
+                              </ion-item>
+                        </ion-col>
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{ "month"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="month_to" (ionChange)="set_georgian_month_to()" placeholder="{{'month'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{ "day"|translate}}</ion-label>
+                                <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}" [(ngModel)]="day_to" (ionChange)="set_georgian_day_to()" placeholder="{{'day'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3 style="   color:white; text-align: center;">{{"gregorian"|translate}}</ion-col>
+                    </ion-row>
+        
+                    <ion-row id="higri" style="margin-top:-10px;">
+                        <ion-col col-3>
+                            <ion-item>
+                                <ion-label>{{"year"|translate}}</ion-label>
+                                <ion-select  okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_year_to" (ionChange)="set_higri_year_to()"  placeholder="{{'year'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of higri_year_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                </ion-select>
+                              </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "month"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_month_to" (ionChange)="set_higri_month_to()" placeholder="{{'month'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  month_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                          </ion-col>
+                          <ion-col col-3>
+                              <ion-item>
+                                  <ion-label>{{ "day"|translate}}</ion-label>
+                                  <ion-select okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}"  [(ngModel)]="higri_day_to" (ionChange)="set_higri_day_to()"  placeholder="{{'day'|translate}}" style="width:100%">
+                                    <ion-option *ngFor="let val of  day_values" [value]='val.value'>
+                                      {{val.name}}
+                                    </ion-option>
+                                  </ion-select>
+                                </ion-item>
+                          </ion-col>
+                          <ion-col col-3 style=" color:white;   text-align: center;"> {{"higri"|translate}}</ion-col>
+                      </ion-row>
+                </div>
+            
+                <div style="margin-top: 4%;    margin-bottom: 4%;">
+                  <ion-item>
+                    <ion-label>
+                      <h2 style="font-size: 18px;font-weight: bold;  color: white;">{{"ISREAD"|translate}}</h2>
+                    </ion-label>
+                    <ion-checkbox  value="connection.Emp_ID" [(ngModel)]="is_read" ></ion-checkbox>
+                  </ion-item>
+                </div>
+            </div>
+      
+          </div>
+
+          <div>
+            <ion-row style="margin-top: -12%;">
+              <ion-col col-4></ion-col>
+              <ion-col col-4>
+                <button ion-button block round color="light" (click)="search()">
+                  <span style="color:#FBC421">{{"search"|translate}}</span>
+                </button>
+              </ion-col>
+              <ion-col col-4></ion-col>
+            </ion-row>
+          </div>
+
+          <div style="margin-top: 47%;" >
+              <ion-row>
+                  <ion-col col-3></ion-col>
+                  <ion-col col-6 (click)="show_all()">
+                    <div style="text-align: center; border:1px solid #3465D9;    padding: 10px;background-color:#3465D9 ">
+                      <span style="font-size:20px;color: white;text-align: center">  {{"show_All"|translate}} </span>
+                    </div>
+                  </ion-col>
+                  <ion-col col-3></ion-col>
+              </ion-row>  
+          </div>
+    </div>
+  <ng-template #out>
+      <ion-row>
+          <ion-col col-6>
+            <button ion-button block color="anothercolor2" style="border-radius: 6px" (click)="inbox()">
+                <span style="color: white;font-size: 20px;"> {{"inbox"|translate}} </span>
+            </button>
+          </ion-col>
+          <ion-col col-6>
+              <button ion-button block color="nothercolor" style="border-radius: 6px" (click)="OutBox()"  >
+                <span style="color: white;font-size: 20px;"> {{"outbox"|translate}} </span>
+              </button>
+          </ion-col>
+      </ion-row>
+
+      <div *ngIf="outBox_messages.length==0" style="margin-top: 20%;font-size: 18px;text-align: center;">
+             {{"outbox is empty"|translate}}
+      </div>
+
+      <div *ngIf="outBox_messages.length!=0">
+        <div *ngFor="let message of outBox_messages" style="border-radius: 5px; background-color: #c9c8d0;margin-top: 4px;margin-bottom: 5px;">
+          <div >
+            <ion-row>
+              <ion-col col-5 *ngIf="message.Msg_Subject!=''" >
+                 {{message.Msg_Subject}}
+              </ion-col>
+              <ion-col col-5 *ngIf="message.Msg_Subject==''">
+                  {{ "no_Subject"|translate}}
+                </ion-col>
+              <ion-col col-6></ion-col>
+              <ion-col col-1>
+                <img src="assets/imgs/31.png" (click)="remove_message(message.Msg_ID)">
+              </ion-col>
+            </ion-row>
+            <ion-row (click)="message_details(message.Msg_Subject,message.Msg_Date,message.Msg_Body,message.Msg_ID)">
+              <ion-col col-9  style="white-space: nowrap;width: 11px;text-overflow: ellipsis;overflow: hidden;">
+                  <span>  {{message.Msg_Body}}</span> 
+              </ion-col>
+              <ion-col col-3 style="white-space: nowrap">
+                  <span> {{message.Msg_Date}}</span>  
+              </ion-col>
+            </ion-row>
+          </div>
+        </div>
+      </div>
+      
+  </ng-template>
+
+    <ion-fab  *ngIf="language=='ar'" right bottom (click)="add_message()" >
+        <button  ion-fab mini><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+    <ion-fab  *ngIf="language=='en'" left bottom (click)="add_message()" >
+      <button  ion-fab mini><ion-icon name="add"></ion-icon></button>
+    </ion-fab>
+</ion-content>

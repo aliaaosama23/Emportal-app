@@ -1,0 +1,12 @@
+page-contacts {
+
+ ion-label.label.label-md {
+  color: #12679a;
+}
+ion-label.label.label-ios {
+  color: #12679a;
+}
+list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
+  border-bottom: none !important;
+}
+}

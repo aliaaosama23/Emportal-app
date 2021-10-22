@@ -1,0 +1,74 @@
+
+<ion-header>
+  <ion-navbar>
+    <ion-row>
+      <ion-col col-3 style="font-size: 20px;" *ngIf="language=='ar'">
+        <ion-icon name="md-arrow-back" style="color:black" (click)="goback()"></ion-icon>
+      </ion-col>
+      <ion-col col-3 style="font-size: 20px;" *ngIf="language=='en'">
+        <ion-icon name="md-arrow-back" style="color:black;transform: rotate(180deg)" (click)="goback()"></ion-icon>
+      </ion-col>
+      <ion-col col-6>
+          <ion-title>
+              {{warning_details.Emp_Warn_Title}}
+          </ion-title>
+      </ion-col>
+      <ion-col col-3></ion-col>
+    </ion-row>
+
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <div>
+
+    <ion-row>
+      <ion-col col-4>
+        <h3>  {{ "message"|translate}}	  </h3>
+      </ion-col>
+      <ion-col col-8></ion-col>
+    </ion-row>
+
+    <div *ngIf="warning_details.Emp_Warn_Message!=''" style="padding: 10px;font-size: 19px;box-shadow: darkcyan;border: 1px solid #9c9c9c;border-radius: 6px;box-shadow: 1px 1px 1px 1px #a9a1a1;">
+        {{warning_details.Emp_Warn_Message}}
+    </div>
+
+    <div *ngIf="warning_details.Emp_Warn_Message==''" style="padding: 10px;font-size: 19px;box-shadow: darkcyan;border: 1px solid #9c9c9c;border-radius: 6px;box-shadow: 1px 1px 1px 1px #a9a1a1;">
+        {{ "not found"|translate}}
+    </div>
+
+    <ion-row>
+        <ion-col col-9>
+          <h3>  Emp_Warn_Status  </h3>
+        </ion-col>
+        <ion-col col-3>
+            <ion-item>
+              <ion-checkbox color="dark" [(ngModel)] ="Emp_Warn_Status" (ionChange)="CheckBoxChange_Emp_Warn_Status()" ></ion-checkbox>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <ion-row>
+        <ion-col col-4>
+          <h3> {{ "warning date"|translate}}  </h3>
+        </ion-col>
+        <ion-col col-8></ion-col>
+    </ion-row>
+
+    <div style="padding: 10px;font-size: 19px;box-shadow: darkcyan;border: 1px solid #9c9c9c;border-radius: 6px;box-shadow: 1px 1px 1px 1px #a9a1a1;">
+        {{warning_details.Emp_Warn_Date}}
+    </div>
+
+    <ion-row>
+      <ion-col col-9>
+        <h3>   {{"ISREAD"|translate}} </h3>
+      </ion-col>
+      <ion-col col-3>
+          <ion-item>
+              <ion-checkbox color="dark" [(ngModel)] ="IsReadable"  (ionChange)="CheckBoxChange_Emp_Warn_Status()"></ion-checkbox>
+          </ion-item>
+      </ion-col>
+    </ion-row>
+
+  </div>
+</ion-content>

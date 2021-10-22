@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-navbar>
+    <ion-row>
+        <ion-col col-5>
+            <ion-title style="padding: 0px !important">
+              {{ "Send requests"|translate}}
+                </ion-title>
+        </ion-col>
+      <ion-col col-6>
+      </ion-col>
+      <ion-col col-1 style="font-size: 20px;">
+          <ion-icon name="md-arrow-back" style="color:black" (click)="goback()"></ion-icon>
+        </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <form #f="ngForm" >
+    <div>
+      <ion-item  style="margin-bottom: 8px;margin-top: 8px;">
+        <ion-row>
+          <ion-col col-3 style="color: #a5a5a5;"> {{"attach file"|translate}} </ion-col>
+          <ion-col  col-8 style="white-space: nowrap">   {{ filename}} </ion-col>
+          <ion-col col-1>
+            <ion-icon name="md-attach"  style="color: #a5a5a5;text-align: center" (click)="open_files()">
+            </ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-item>
+  </div>
+      <div *ngFor="let Attribute of Attributes" >
+
+      
+
+        <ion-item *ngIf="Attribute.Req_Attrib_Type!='Select'" style="margin-bottom: 8px;margin-top: 8px;">
+            <ion-input  placeholder={{Attribute.Req_Attrib_Lable}} [(ngModel)]="Attribute.val" name="Attribute.val" type={{Attribute.Req_Attrib_Type}}></ion-input>
+        </ion-item>
+
+        <ion-item *ngIf="Attribute.Req_Attrib_Type=='Select'" style="margin-bottom: 8px;margin-top: 8px;">
+          <ion-select  placeholder={{Attribute.Req_Attrib_Lable}} okText="{{'ok'|translate}}" cancelText="{{'cancel'|translate}}" [(ngModel)]="Attribute.val"  name="Attribute.Req_Attrib_Options.split('|')">
+            <ion-option  *ngFor="let option of Attribute.Req_Attrib_Options.split('|')" [value]="option">
+              {{option}}
+            </ion-option>
+          </ion-select>
+        </ion-item>
+
+      </div>
+
+     
+
+      <ion-row>
+        <ion-col col-3>  </ion-col>
+        <ion-col col-6>  <button ion-button  round block (click)="add_request()" color="light" style="    top: 25%;" >
+              <span style="font-size: 21px;color: #FBC421">   {{"save"|translate}}  </span>
+          </button>
+        </ion-col>
+        <ion-col col-3>  </ion-col>
+      </ion-row>
+
+    </form>
+</ion-content>

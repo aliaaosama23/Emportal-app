@@ -1,0 +1,76 @@
+page-warning {
+  ion-label.label.label-md {
+    color: #12679a !important;
+}
+ion-label.label.label-ios {
+  color: #12679a !important;
+}
+
+.select-md {
+  padding: 0px;
+}
+.select-ios {
+padding: 0px;
+}
+ion-select {
+
+max-width: 100% !important;
+width: 100%;
+}
+.select-md .select-icon .select-icon-inner {
+right: 0px;
+
+}
+.select-ios .select-icon .select-icon-inner {
+right: 0px;
+
+}
+.item-md.item-block .item-inner {
+padding-left: 0px;
+border-bottom: 1px solid #dedede;
+}
+.item-ios.item-block .item-inner {
+padding-left: 0px;
+border-bottom: 1px solid #dedede;
+}
+.isread{
+background: white
+}
+.notread{
+
+background: #cacace
+}
+.item-md.item-block .item-inner {
+padding-left: 0px;
+border-bottom: none !important
+}
+.item-md.item-block .item-inner {
+padding-right: 8px;
+border-bottom: none !important
+}
+.item-ios.item-block .item-inner {
+padding-left: 0px;
+border-bottom: none !important
+}
+.item-ios.item-block .item-inner {
+padding-right: 8px;
+border-bottom: none !important
+}
+
+.select-text {
+overflow: visible !important;
+}
+.opened{
+  height: 62%;
+}
+.opened1{
+  height: 40%;
+}
+.closed{
+  height: 30%;
+}
+
+.select-text {
+  color: white !important;
+}
+}

@@ -1,0 +1,72 @@
+
+
+keystore:
+eserviceKeystore
+alis name:
+eservice
+
+keytool -genkey -v -keystore eserviceKeystore.keystore -alias eservice -keyalg RSA -keysize 2048 -validity 10000
+
+keystore password:
+123456
+
+-------------------------------------------for update:-----------------------------------------------------------
+
+3909158
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore eserviceKeystore.keystore app-release-unsigned.apk eservice
+
+
+C:\Users\alyaa.NITCOTEK\AppData\Local\Android\Sdk\build-tools\28.0.3
+
+./zipalign -v 4 app-release-unsigned.apk eservice1.apk
+
+
+
+google play account:
+nitco.mobile@gmail.com
+Mobile2015P@$$
+
+
+===================================================================================================
+error uploading:
+Your app currently targets API level 27 and must target at least API level 28 
+to ensure it is built on the latest APIs optimized for security and performance. 
+Change your app's target API level to at least 28. Learn how.
+
+
+
+
+iPhone 6.5 => 1242*2688
+
+iPhone 5.5 => 1242*2208
+
+iPad 12.9 3rd gen & iPad 12.9 2nd gen=> 2048 *2732
+
+
+all screens without alpha or transparency
+
+===================================================================================================
+Your app currently targets API level 27 and must target at least API level 28 to
+ ensure it is built on the latest APIs optimized for security and performance. Change your app's target API level to at least 28. Learn how.
+
+
+addded to config.xml:
+ <preference name="android-minSdkVersion" value="19" />
+    <preference name="android-targetSdkVersion" value="28" />
+----------------------------------------------------------
+android platform 7.1.4
+
+
+
+
+0.0.2 release notice:
+
+>>> Signer
+    X.509, CN=aliaa, OU=nitcotek, O=nitcotek, L=mansoura, ST=egypt, C=  EG
+    [trusted certificate]
+
+jar signed.
+
+Warning:
+The signer's certificate is self-signed.

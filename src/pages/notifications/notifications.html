@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar  hideBackButton>
+    <ion-row>
+      <ion-col col-6 style="text-align: center;          margin-top: -4px">
+          <ion-title *ngIf="language=='ar'" style="    text-align: right;">  {{"notifications"|translate}} </ion-title>
+          <ion-title *ngIf="language=='en'" style="    text-align: left;">  {{"notifications"|translate}} </ion-title>
+      </ion-col>
+     <ion-col col-2></ion-col>
+     <ion-col col-4>
+         <img src="assets/imgs/app_logo.png">
+     </ion-col>
+    </ion-row>
+  </ion-navbar>
+</ion-header>
+<ion-content >
+
+
+
+  <div  style="margin-top: 30%;font-size: 20px ;text-align: center">
+        {{"no_notifications"|translate}}
+  </div>
+
+  <!-- <div *ngIf="notifications.length!=0" style="padding: 3px">
+    <ion-row style="background-color: #dbdee6;border-radius: 8px;margin-top: 10px;margin-bottom: 10px;">
+      <ion-col col-8>
+          <h3 style="margin-top: 1px;margin-bottom: 1px;    white-space: nowrap;"> 11111تم الموافقه علي طلبك </h3>
+      </ion-col>
+      <ion-col col-4 style="text-align: center">
+        <h5 style="margin-top: 1px;margin-bottom: 1px;">  12/1/2019</h5>
+         <span >
+          12am
+        </span>
+      </ion-col>
+    </ion-row>
+    <ion-row style="background-color: #dbdee6;border-radius: 8px;margin-top: 10px;margin-bottom: 10px;">
+      <ion-col col-8>
+          <h3 style="margin-top: 1px;margin-bottom: 1px;    white-space: nowrap;"> 11111تم الموافقه علي طلبك </h3>
+      </ion-col>
+      <ion-col col-4 style="text-align: center">
+         <h5 style="margin-top: 1px;margin-bottom: 1px;">  12/1/2019</h5>
+         <span >
+          12am
+        </span>
+      </ion-col>
+    </ion-row>
+    <ion-row style="background-color: #dbdee6;border-radius: 8px;margin-top: 10px;margin-bottom: 10px;">
+      <ion-col col-8>
+          <h3 style="margin-top: 1px;margin-bottom: 1px;    white-space: nowrap;"> 11111تم الموافقه علي طلبك </h3>
+      </ion-col>
+      <ion-col col-4 style="text-align: center">
+         <h5 style="margin-top: 1px;margin-bottom: 1px;">  12/1/2019</h5>
+         <span >
+          12am
+        </span>
+      </ion-col>
+    </ion-row>
+  </div> -->
+</ion-content>
